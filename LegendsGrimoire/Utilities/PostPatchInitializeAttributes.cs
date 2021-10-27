@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace Legends.Utilities {
+namespace LegendsGrimoire.Utilities {
     class PostPatchInitializeAttribute : Attribute {
     }
 

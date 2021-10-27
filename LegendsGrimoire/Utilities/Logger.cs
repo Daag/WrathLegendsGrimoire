@@ -2,7 +2,7 @@
 using Kingmaker.Blueprints.JsonSystem;
 using UnityModManagerNet;
 
-namespace Legends.Utilities
+namespace LegendsGrimoire.Utilities
 {
     static class Logger
     {

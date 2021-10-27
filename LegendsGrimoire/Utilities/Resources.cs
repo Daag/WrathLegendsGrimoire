@@ -1,9 +1,9 @@
 ﻿using JetBrains.Annotations;
 using Kingmaker.Blueprints;
-using Legends.Utilities;
+using LegendsGrimoire.Utilities;
 using System.Collections.Generic;
 
-namespace Legends
+namespace LegendsGrimoire
 {
     static class Resources
     {

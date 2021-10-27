@@ -2,7 +2,7 @@
 using Kingmaker.Utility;
 using System;
 
-namespace Legends.Utilities
+namespace LegendsGrimoire.Utilities
 {
     static class Helpers
     {

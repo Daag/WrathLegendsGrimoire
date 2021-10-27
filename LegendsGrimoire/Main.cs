@@ -1,8 +1,8 @@
 ﻿using HarmonyLib;
-using Legends.Utilities;
+using LegendsGrimoire.Utilities;
 using UnityModManagerNet;
 
-namespace Legends
+namespace LegendsGrimoire
 {
     static class Main
     {

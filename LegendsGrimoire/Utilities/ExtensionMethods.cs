@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Legends.Utilities
+namespace LegendsGrimoire.Utilities
 {
     static class ExtensionMethods
     {
