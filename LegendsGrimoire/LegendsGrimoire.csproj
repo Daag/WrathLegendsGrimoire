@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -116,8 +117,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Content\ContentAdder.cs" />
+    <Compile Include="Content\Feats\BladeDancer.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\FeatUtil.cs" />
     <Compile Include="Utilities\PostPatchInitializeAttributes.cs" />
     <Compile Include="Utilities\Resources.cs" />
     <Compile Include="Utilities\ExtensionMethods.cs" />
