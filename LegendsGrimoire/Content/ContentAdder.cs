@@ -19,6 +19,7 @@ namespace LegendsGrimoire.Content
                 Logger.LogHeader("Loading New Content");
 
                 Feats.BladeDancer.AddBladeDancer();
+                Feats.ProdigiousTwoWeaponFighting.AddProdigiousTwoWeaponFighting();
             }
         }
     }

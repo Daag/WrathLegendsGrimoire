@@ -5,18 +5,11 @@ using Kingmaker.Designers.Mechanics.Facts;
 using Kingmaker.EntitySystem.Stats;
 using Kingmaker.Enums;
 using LegendsGrimoire.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LegendsGrimoire.Content.Feats
 {
     static class BladeDancer
     {
-        static readonly BlueprintFeature weaponFinesse = Resources.GetBlueprint<BlueprintFeature>("90e54424d682d104ab36436bd527af09");
-
         public static void AddBladeDancer()
         {
             var bladeDancer = Helpers.Create<BlueprintFeature>(bp =>
@@ -192,15 +185,7 @@ namespace LegendsGrimoire.Content.Feats
                     c.Stat = StatType.Dexterity;
                     c.Category = WeaponCategory.UnarmedStrike;
                 }));
-                bp.AddComponent(Helpers.Create<PrerequisiteFeature>(c =>
-                {
-                    c.m_Feature = weaponFinesse.ToReference<BlueprintFeatureReference>();
-                    c.Group = Prerequisite.GroupType.Any;
-                }));
             });
-
-            var weaponFinessePrereq = bladeDancer.GetComponent<PrerequisiteFeature>();
-            weaponFinessePrereq.Group = Prerequisite.GroupType.Any;
 
             Resources.AddBlueprint(bladeDancer);
             FeatUtil.AddAsFeat(bladeDancer);
