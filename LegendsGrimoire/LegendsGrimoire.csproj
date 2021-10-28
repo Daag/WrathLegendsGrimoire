@@ -120,6 +120,7 @@
     <Compile Include="Components\Prerequisites\PrerequisiteGroup.cs" />
     <Compile Include="Content\ContentAdder.cs" />
     <Compile Include="Content\Feats\BladeDancer.cs" />
+    <Compile Include="Content\Feats\PolearmDancer.cs" />
     <Compile Include="Content\Feats\ProdigiousTwoWeaponFighting.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

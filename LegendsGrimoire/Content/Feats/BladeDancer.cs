@@ -15,60 +15,13 @@ namespace LegendsGrimoire.Content.Feats
             var bladeDancer = Helpers.Create<BlueprintFeature>(bp =>
             {
                 bp.name = "BladeDancer";
-                bp.AssetGuid = new BlueprintGuid(new System.Guid("c6398d5e497b45ef8d09cb291166af62"));
                 bp.SetName("Blade Dancer");
-                bp.SetDescription("You hit your enemies with precision and pinpoint strikes. You use your Dexterity instead of your Strength for damage on weapons you can finesse.");
+                bp.AssetGuid = new BlueprintGuid(new System.Guid("c6398d5e497b45ef8d09cb291166af62"));
+                bp.SetDescription("You hit your enemies with precision and pinpoint strikes. You use your Dexterity instead "
+                    + "of your Strength for damage on weapons you can finesse.");
                 bp.Ranks = 1;
                 bp.ReapplyOnLevelUp = true;
                 bp.Groups = new FeatureGroup[] { FeatureGroup.Feat, FeatureGroup.CombatFeat };
-                bp.AddComponent(Helpers.Create<WeaponTypeDamageStatReplacement>(c =>
-                {
-                    c.Stat = StatType.Dexterity;
-                    c.Category = WeaponCategory.Bardiche;
-                    c.TwoHandedBonus = true;
-                }));
-                bp.AddComponent(Helpers.Create<WeaponTypeDamageStatReplacement>(c =>
-                {
-                    c.Stat = StatType.Dexterity;
-                    c.Category = WeaponCategory.Fauchard;
-                    c.TwoHandedBonus = true;
-                }));
-                bp.AddComponent(Helpers.Create<WeaponTypeDamageStatReplacement>(c =>
-                {
-                    c.Stat = StatType.Dexterity;
-                    c.Category = WeaponCategory.Glaive;
-                    c.TwoHandedBonus = true;
-                }));
-                bp.AddComponent(Helpers.Create<WeaponTypeDamageStatReplacement>(c =>
-                {
-                    c.Stat = StatType.Dexterity;
-                    c.Category = WeaponCategory.Javelin;
-                    c.TwoHandedBonus = true;
-                }));
-                bp.AddComponent(Helpers.Create<WeaponTypeDamageStatReplacement>(c =>
-                {
-                    c.Stat = StatType.Dexterity;
-                    c.Category = WeaponCategory.Longspear;
-                    c.TwoHandedBonus = true;
-                }));
-                bp.AddComponent(Helpers.Create<WeaponTypeDamageStatReplacement>(c =>
-                {
-                    c.Stat = StatType.Dexterity;
-                    c.Category = WeaponCategory.Shortspear;
-                    c.TwoHandedBonus = true;
-                }));
-                bp.AddComponent(Helpers.Create<WeaponTypeDamageStatReplacement>(c =>
-                {
-                    c.Stat = StatType.Dexterity;
-                    c.Category = WeaponCategory.Spear;
-                    c.TwoHandedBonus = true;
-                }));
-                bp.AddComponent(Helpers.Create<WeaponTypeDamageStatReplacement>(c =>
-                {
-                    c.Stat = StatType.Dexterity;
-                    c.Category = WeaponCategory.Trident;
-                    c.TwoHandedBonus = true;
-                }));
                 bp.AddComponent(Helpers.Create<WeaponTypeDamageStatReplacement>(c =>
                 {
                     c.Stat = StatType.Dexterity;

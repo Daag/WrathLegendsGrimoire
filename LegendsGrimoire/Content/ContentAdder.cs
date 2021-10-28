@@ -20,6 +20,7 @@ namespace LegendsGrimoire.Content
 
                 Feats.BladeDancer.AddBladeDancer();
                 Feats.ProdigiousTwoWeaponFighting.AddProdigiousTwoWeaponFighting();
+                Feats.PolearmDancer.AddPolearmDancer();
             }
         }
     }
