@@ -123,6 +123,8 @@
     <Compile Include="Content\Feats\ProdigiousTwoWeaponFighting.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tweaks\MetamagicTweak.cs" />
+    <Compile Include="Tweaks\MythicTweak.cs" />
     <Compile Include="Utilities\FeatUtil.cs" />
     <Compile Include="Utilities\PostPatchInitializeAttributes.cs" />
     <Compile Include="Utilities\Resources.cs" />
