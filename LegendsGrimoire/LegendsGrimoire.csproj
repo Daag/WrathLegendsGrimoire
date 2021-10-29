@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -116,8 +117,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Prerequisites\PrerequisiteGroup.cs" />
+    <Compile Include="Content\Backgrounds\ArcaneTinker.cs" />
+    <Compile Include="Content\Backgrounds\CunningDiplomat.cs" />
+    <Compile Include="Content\Backgrounds\DivineVoice.cs" />
+    <Compile Include="Content\Backgrounds\FeyTouched.cs" />
+    <Compile Include="Content\ContentAdder.cs" />
+    <Compile Include="Content\Feats\BladeDancer.cs" />
+    <Compile Include="Content\Feats\PolearmDancer.cs" />
+    <Compile Include="Content\Feats\ProdigiousTwoWeaponFighting.cs" />
+    <Compile Include="Content\Feats\SkillTraining.cs" />
+    <Compile Include="Content\Legendary\Adventurer.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tweaks\FeatTweak.cs" />
+    <Compile Include="Tweaks\MetamagicTweak.cs" />
+    <Compile Include="Tweaks\MythicTweak.cs" />
+    <Compile Include="Utilities\FeatUtil.cs" />
     <Compile Include="Utilities\PostPatchInitializeAttributes.cs" />
     <Compile Include="Utilities\Resources.cs" />
     <Compile Include="Utilities\ExtensionMethods.cs" />
@@ -130,6 +146,7 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

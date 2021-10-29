@@ -1,6 +1,7 @@
 ﻿using Kingmaker.Blueprints;
 using Kingmaker.Blueprints.Classes;
 using Kingmaker.Blueprints.Classes.Selection;
+using Kingmaker.Blueprints.Facts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,16 @@ namespace LegendsGrimoire.Utilities
 {
     static class ExtensionMethods
     {
+        public static void SetName(this BlueprintUnitFact feature, String name)
+        {
+            feature.m_DisplayName = Helpers.CreateString(feature.name + ".Name", name);
+        }
+
+        public static void SetDescription(this BlueprintUnitFact feature, String description)
+        {
+            feature.m_Description = Helpers.CreateString(feature.name + ".Description", description);
+        }
+
         public static void AddComponent(this BlueprintScriptableObject obj, BlueprintComponent component)
         {
             obj.SetComponents(obj.ComponentsArray.AppendToArray(component));
@@ -82,6 +93,24 @@ namespace LegendsGrimoire.Utilities
         {
             var list = array.ToList();
             return list.Remove(value) ? list.ToArray() : array;
+        }
+
+        public static void AddFeatures(this BlueprintFeatureSelection selection, params BlueprintFeature[] features)
+        {
+            foreach (var feature in features)
+            {
+                var featureReference = feature.ToReference<BlueprintFeatureReference>();
+                if (!selection.m_AllFeatures.Contains(featureReference))
+                {
+                    selection.m_AllFeatures = selection.m_AllFeatures.AppendToArray(featureReference);
+                }
+                if (!selection.m_Features.Contains(featureReference))
+                {
+                    selection.m_Features = selection.m_Features.AppendToArray(featureReference);
+                }
+            }
+            selection.m_AllFeatures = selection.m_AllFeatures.OrderBy(feature => feature.Get().Name).ToArray();
+            selection.m_Features = selection.m_Features.OrderBy(feature => feature.Get().Name).ToArray();
         }
     }
 }
