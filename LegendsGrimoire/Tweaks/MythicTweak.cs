@@ -23,15 +23,7 @@ namespace LegendsGrimoire.Tweaks
                 TweakEnduringSpells();
             }
 
-            static readonly BlueprintFeature enduringSpells = Resources.GetBlueprint<BlueprintFeature>("2f206e6d292bdfb4d981e99dcf08153f");
             static readonly BlueprintFeature abundantCasting = Resources.GetBlueprint<BlueprintFeature>("cf594fa8871332a4ba861c6002480ec2");
-
-            public static void TweakEnduringSpells()
-            {
-                var enduringSpellsComponent = enduringSpells.GetComponent<EnduringSpells>();
-                enduringSpellsComponent.m_Greater = enduringSpells.ToReference<BlueprintUnitFactReference>();
-                Logger.LogPatch("Patched", enduringSpells);
-            }
 
             public static void TweakAbundantCasting()
             {
@@ -40,6 +32,15 @@ namespace LegendsGrimoire.Tweaks
                     1, 2, 3, 4, 5, 6, 7, 8, 9
                 };
                 Logger.LogPatch("Patched", abundantCasting);
+            }
+
+            static readonly BlueprintFeature enduringSpells = Resources.GetBlueprint<BlueprintFeature>("2f206e6d292bdfb4d981e99dcf08153f");
+
+            public static void TweakEnduringSpells()
+            {
+                var enduringSpellsComponent = enduringSpells.GetComponent<EnduringSpells>();
+                enduringSpellsComponent.m_Greater = enduringSpells.ToReference<BlueprintUnitFactReference>();
+                Logger.LogPatch("Patched", enduringSpells);
             }
         }
     }

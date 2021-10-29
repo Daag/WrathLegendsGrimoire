@@ -18,9 +18,17 @@ namespace LegendsGrimoire.Content
                 Initialized = true;
                 Logger.LogHeader("Loading New Content");
 
+                Backgrounds.ArcaneTinker.AddArcaneTinker();
+                Backgrounds.CunningDiplomat.AddCunningDiplomat();
+                Backgrounds.DivineVoice.AddDivineVoice();
+                Backgrounds.FeyTouched.AddFeyTouched();
+
                 Feats.BladeDancer.AddBladeDancer();
                 Feats.ProdigiousTwoWeaponFighting.AddProdigiousTwoWeaponFighting();
                 Feats.PolearmDancer.AddPolearmDancer();
+                Feats.SkillTraining.AddSkillTraining();
+
+                Legendary.Adventurer.AddLegendaryAdventurer();
             }
         }
     }

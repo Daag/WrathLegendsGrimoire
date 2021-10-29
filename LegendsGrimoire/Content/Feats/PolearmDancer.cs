@@ -7,16 +7,13 @@ using Kingmaker.EntitySystem.Stats;
 using Kingmaker.Enums;
 using Kingmaker.UnitLogic.FactLogic;
 using LegendsGrimoire.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LegendsGrimoire.Content.Feats
 {
     static class PolearmDancer
     {
+        public static BlueprintGuid AssetGuid = new BlueprintGuid(new System.Guid("2bbeb475923e49f08c2f8e37b08dbf8e"));
+
         static readonly BlueprintWeaponType bardiche = Resources.GetBlueprint<BlueprintWeaponType>("b1cbf457fd471d148b39ae56667f405a");
         static readonly BlueprintWeaponType fauchard = Resources.GetBlueprint<BlueprintWeaponType>("7a40899c4defec94bb9c291bde74f1a8");
         static readonly BlueprintWeaponType glaive = Resources.GetBlueprint<BlueprintWeaponType>("7a14a1b224cd173449cb7ffc77d5f65c");
@@ -32,7 +29,7 @@ namespace LegendsGrimoire.Content.Feats
             {
                 bp.name = "PolearmDancer";
                 bp.SetName("Polearm Dancer");
-                bp.AssetGuid = new BlueprintGuid(new System.Guid("2bbeb475923e49f08c2f8e37b08dbf8e"));
+                bp.AssetGuid = AssetGuid;
                 bp.SetDescription("You may use your Dexterity modifier instead of your Strength modifier on attack "
                     + "and damage rolls with spears and polearms.");
                 bp.Ranks = 1;
