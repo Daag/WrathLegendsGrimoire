@@ -134,6 +134,7 @@
     <Compile Include="Tweaks\MetamagicTweak.cs" />
     <Compile Include="Tweaks\MythicTweak.cs" />
     <Compile Include="Utilities\FeatUtil.cs" />
+    <Compile Include="Utilities\ItemUtil.cs" />
     <Compile Include="Utilities\PostPatchInitializeAttributes.cs" />
     <Compile Include="Utilities\Resources.cs" />
     <Compile Include="Utilities\ExtensionMethods.cs" />

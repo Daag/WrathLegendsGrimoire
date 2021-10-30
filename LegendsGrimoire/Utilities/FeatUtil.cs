@@ -19,6 +19,44 @@ namespace LegendsGrimoire.Utilities
             }
         }
 
+        public static class Feats
+        {
+            public static BlueprintFeature CombatExpertise => Resources.GetBlueprint<BlueprintFeature>("4c44724ffa8844f4d9bedb5bb27d144a");
+            public static BlueprintFeature DeadlyAim => Resources.GetBlueprint<BlueprintFeature>("f47df34d53f8c904f9981a3ee8e84892");
+            public static BlueprintFeature Dodge => Resources.GetBlueprint<BlueprintFeature>("97e216dbb46ae3c4faef90cf6bbe6fd5");
+            public static BlueprintFeature DoubleSlice => Resources.GetBlueprint<BlueprintFeature>("8a6a1920019c45d40b4561f05dcb3240");
+            public static BlueprintFeature ImprovedBullRush => Resources.GetBlueprint<BlueprintFeature>("b3614622866fe7046b787a548bbd7f59");
+            public static BlueprintFeature ImprovedDirtyTrick => Resources.GetBlueprint<BlueprintFeature>("ed699d64870044b43bb5a7fbe3f29494");
+            public static BlueprintFeature ImprovedDisarm => Resources.GetBlueprint<BlueprintFeature>("25bc9c439ac44fd44ac3b1e58890916f");
+            public static BlueprintFeature ImprovedSunder => Resources.GetBlueprint<BlueprintFeature>("9719015edcbf142409592e2cbaab7fe1");
+            public static BlueprintFeature ImprovedTrip => Resources.GetBlueprint<BlueprintFeature>("0f15c6f70d8fb2b49aa6cc24239cc5fa");
+            public static BlueprintFeature Mobility => Resources.GetBlueprint<BlueprintFeature>("2a6091b97ad940943b46262600eaeaeb");
+            public static BlueprintFeature PointBlankShot => Resources.GetBlueprint<BlueprintFeature>("0da0c194d6e1d43419eb8d990b28e0ab");
+            public static BlueprintFeature PowerAttack => Resources.GetBlueprint<BlueprintFeature>("9972f33f977fc724c838e59641b2fca5");
+            public static BlueprintFeature SpellFocusAbjuration => Resources.GetBlueprint<BlueprintFeature>("71a3f1c1ac77ae3488b9b3d6d2aac01a");
+            public static BlueprintFeature SpellFocusAbjurationGreater => Resources.GetBlueprint<BlueprintFeature>("f4c39693ebaffd244bbe4694e3c3ce0d");
+            public static BlueprintFeature SpellFocusConjuration => Resources.GetBlueprint<BlueprintFeature>("d342cc595f499434687f9765f56d525c");
+            public static BlueprintFeature SpellFocusConjurationGreater => Resources.GetBlueprint<BlueprintFeature>("d1e78eeeb5295e048be5b2500c002233");
+            public static BlueprintFeature SpellFocusDivination => Resources.GetBlueprint<BlueprintFeature>("955e97411611d384db2cbc00d7ed5ead");
+            public static BlueprintFeature SpellFocusDivinationGreater => Resources.GetBlueprint<BlueprintFeature>("1deb774e8ba7ec64c83cd26c2d09f019");
+            public static BlueprintFeature SpellFocusEnchantment => Resources.GetBlueprint<BlueprintFeature>("c5bf645f128c39b40850cde005b8538f");
+            public static BlueprintFeature SpellFocusEnchantmentGreater => Resources.GetBlueprint<BlueprintFeature>("f2ae8d44d24996c449e69b6f5248507d");
+            public static BlueprintFeature SpellFocusEvocation => Resources.GetBlueprint<BlueprintFeature>("743d0106ee3076342839c6d550cdda25");
+            public static BlueprintFeature SpellFocusEvocationGreater => Resources.GetBlueprint<BlueprintFeature>("f2970e8a73baeae469407638f7e75f50");
+            public static BlueprintFeature SpellFocusIllusion => Resources.GetBlueprint<BlueprintFeature>("e588279a80eb7a24b813fadad4bc83b5");
+            public static BlueprintFeature SpellFocusIllusionGreater => Resources.GetBlueprint<BlueprintFeature>("b6dff9186edca3141ba0ab4376d1347d");
+            public static BlueprintFeature SpellFocusNecromancy => Resources.GetBlueprint<BlueprintFeature>("8791da25011fd1844ad61a3fea6ece54");
+            public static BlueprintFeature SpellFocusNecromancyGreater => Resources.GetBlueprint<BlueprintFeature>("7f7a73444f15b8644a8cf0f2f149c6aa");
+            public static BlueprintFeature SpellFocusTransmutation => Resources.GetBlueprint<BlueprintFeature>("49907a2e51b49d641aad3c9781a3a698");
+            public static BlueprintFeature SpellFocusTransmutationGreater => Resources.GetBlueprint<BlueprintFeature>("74fd23356fc4c9847986d48f1a40bc7a");
+            public static BlueprintFeature SpellPenetration => Resources.GetBlueprint<BlueprintFeature>("ee7dc126939e4d9438357fbd5980d459");
+            public static BlueprintFeature SpellPenetrationGreater => Resources.GetBlueprint<BlueprintFeature>("1978c3f91cfbbc24b9c9b0d017f4beec");
+            public static BlueprintFeature TwoWeaponFighting => Resources.GetBlueprint<BlueprintFeature>("ac8aaf29054f5b74eb18f2af950e752d");
+            public static BlueprintFeature TwoWeaponFightingImproved => Resources.GetBlueprint<BlueprintFeature>("9af88f3ed8a017b45a6837eab7437629");
+            public static BlueprintFeature TwoWeaponFightingGreater => Resources.GetBlueprint<BlueprintFeature>("c126adbdf6ddd8245bda33694cd774e8");
+            public static BlueprintFeature WeaponFinesse => Resources.GetBlueprint<BlueprintFeature>("90e54424d682d104ab36436bd527af09");
+        }
+
         public static class Selections
         {
             public static BlueprintFeatureSelection AasimarHeritageSelection => Resources.GetBlueprint<BlueprintFeatureSelection>("67aabcbce8f8ae643a9d08a6ca67cabd");

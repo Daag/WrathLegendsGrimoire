@@ -1,7 +1,6 @@
 ﻿using Kingmaker.Blueprints;
 using Kingmaker.Blueprints.Classes;
 using Kingmaker.Blueprints.Classes.Selection;
-using Kingmaker.EntitySystem.Stats;
 using Kingmaker.UnitLogic.FactLogic;
 using LegendsGrimoire.Utilities;
 using System.Linq;
@@ -40,6 +39,37 @@ namespace LegendsGrimoire.Content.Legendary
             });
             Resources.AddBlueprint(mainCharacterBackgroundSelection);
 
+            var featTaxes = Helpers.Create<BlueprintFeature>(bp =>
+            {
+                bp.name = "FeatTaxes";
+                bp.AssetGuid = new BlueprintGuid(new System.Guid("02dbbe42bc25463884d4fd864eac96e5"));
+                bp.SetName("Starting Feats");
+                bp.SetDescription("You know the basics of adventuring.");
+                bp.Ranks = 1;
+                bp.ReapplyOnLevelUp = true;
+                bp.IsClassFeature = true;
+                bp.Groups = new FeatureGroup[] { };
+                bp.AddComponent<AddFacts>(c =>
+                {
+                    c.m_Facts = new BlueprintUnitFactReference[]
+                    {
+                        FeatUtil.Feats.CombatExpertise.ToReference<BlueprintUnitFactReference>(),
+                        FeatUtil.Feats.DeadlyAim.ToReference<BlueprintUnitFactReference>(),
+                        FeatUtil.Feats.DoubleSlice.ToReference<BlueprintUnitFactReference>(),
+                        FeatUtil.Feats.ImprovedBullRush.ToReference<BlueprintUnitFactReference>(),
+                        FeatUtil.Feats.ImprovedDirtyTrick.ToReference<BlueprintUnitFactReference>(),
+                        FeatUtil.Feats.ImprovedDisarm.ToReference<BlueprintUnitFactReference>(),
+                        FeatUtil.Feats.ImprovedSunder.ToReference<BlueprintUnitFactReference>(),
+                        FeatUtil.Feats.ImprovedTrip.ToReference<BlueprintUnitFactReference>(),
+                        FeatUtil.Feats.PointBlankShot.ToReference<BlueprintUnitFactReference>(),
+                        FeatUtil.Feats.PowerAttack.ToReference<BlueprintUnitFactReference>(),
+                        FeatUtil.Feats.TwoWeaponFighting.ToReference<BlueprintUnitFactReference>(),
+                        FeatUtil.Feats.WeaponFinesse.ToReference<BlueprintUnitFactReference>()
+                    };
+                });
+            });
+            Resources.AddBlueprint(featTaxes);
+
             var mainCharacterProgression = Helpers.Create<BlueprintProgression>(bp => {
                 bp.name = "MainCharacterProgression";
                 bp.AssetGuid = new BlueprintGuid(new System.Guid("30f7b8080c3143d3ae35a556f966f263"));
@@ -51,7 +81,7 @@ namespace LegendsGrimoire.Content.Legendary
                 bp.GiveFeaturesForPreviousLevels = true;
                 bp.HideInUI = false;
                 bp.LevelEntries = new LevelEntry[] {
-                    new LevelEntry(){ Level = 1, Features = { mainCharacterBackgroundSelection, basicFeatSelection, skillTraining }},
+                    new LevelEntry(){ Level = 1, Features = { mainCharacterBackgroundSelection, basicFeatSelection, skillTraining, featTaxes }},
                     new LevelEntry(){ Level = 2, Features = { basicFeatSelection }},
                     new LevelEntry(){ Level = 4, Features = { basicFeatSelection }},
                     new LevelEntry(){ Level = 6, Features = { basicFeatSelection }},
@@ -77,7 +107,7 @@ namespace LegendsGrimoire.Content.Legendary
                 bp.GiveFeaturesForPreviousLevels = true;
                 bp.HideInUI = false;
                 bp.LevelEntries = new LevelEntry[] {
-                    new LevelEntry(){ Level = 1, Features = { basicFeatSelection }},
+                    new LevelEntry(){ Level = 1, Features = { basicFeatSelection, featTaxes }},
                     new LevelEntry(){ Level = 2, Features = { basicFeatSelection }}
                 };
             });

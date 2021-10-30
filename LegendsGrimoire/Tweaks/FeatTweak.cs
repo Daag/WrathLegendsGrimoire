@@ -1,9 +1,9 @@
 ﻿using HarmonyLib;
 using Kingmaker.Blueprints;
-using Kingmaker.Blueprints.Classes;
 using Kingmaker.Blueprints.Items.Weapons;
 using Kingmaker.Blueprints.JsonSystem;
 using Kingmaker.EntitySystem.Stats;
+using Kingmaker.UnitLogic.ActivatableAbilities;
 using Kingmaker.UnitLogic.FactLogic;
 using LegendsGrimoire.Utilities;
 
@@ -22,25 +22,49 @@ namespace LegendsGrimoire.Tweaks
                 if (Initialized) return;
                 Initialized = true;
                 Logger.LogHeader("Mythic Tweaks");
+                TweakCombatExpertise();
+                TweakDeadlyAim();
                 TweakPointBlankShot();
+                TweakPowerAttack();
             }
 
-            static readonly BlueprintFeature pointBlankShot = Resources.GetBlueprint<BlueprintFeature>("0da0c194d6e1d43419eb8d990b28e0ab");
-            static readonly BlueprintWeaponType javelin = Resources.GetBlueprint<BlueprintWeaponType>("a70cea34b275522458654beb3c53fe3f");
-            static readonly BlueprintWeaponType throwingAxe = Resources.GetBlueprint<BlueprintWeaponType>("ca131c71f4fefcb48b30b5991520e01d");
+            public static void TweakCombatExpertise()
+            {
+                var combatExpertiseActivatableAbility = Resources.GetBlueprint<BlueprintActivatableAbility>("a75f33b4ff41fc846acbac75d1a88442");
+                combatExpertiseActivatableAbility.IsOnByDefault = false;
+                combatExpertiseActivatableAbility.DoNotTurnOffOnRest = true;
+                combatExpertiseActivatableAbility.DeactivateIfCombatEnded = false;
+                combatExpertiseActivatableAbility.DeactivateAfterFirstRound = false;
+                combatExpertiseActivatableAbility.ActivationType = AbilityActivationType.Immediately;
+                combatExpertiseActivatableAbility.DeactivateIfOwnerDisabled = true;
+            }
+
+            public static void TweakDeadlyAim()
+            {
+                var deadlyAimActivatableAbility = Resources.GetBlueprint<BlueprintActivatableAbility>("ccde5ab6edb84f346a74c17ea3e3a70c");
+                deadlyAimActivatableAbility.IsOnByDefault = false;
+                deadlyAimActivatableAbility.DoNotTurnOffOnRest = true;
+            }
 
             public static void TweakPointBlankShot()
             {
-                pointBlankShot.AddComponent(Helpers.Create<AttackStatReplacement>(c =>
+                FeatUtil.Feats.PointBlankShot.AddComponent(Helpers.Create<AttackStatReplacement>(c =>
                 {
                     c.ReplacementStat = StatType.Strength;
                     c.m_WeaponTypes = new BlueprintWeaponTypeReference[]
                     {
-                    javelin.ToReference<BlueprintWeaponTypeReference>(),
-                    throwingAxe.ToReference<BlueprintWeaponTypeReference>()
+                    ItemUtil.WeaponTypes.Javelin.ToReference<BlueprintWeaponTypeReference>(),
+                    ItemUtil.WeaponTypes.ThrowingAxe.ToReference<BlueprintWeaponTypeReference>()
                     };
                     c.CheckWeaponTypes = true;
                 }));
+            }
+
+            public static void TweakPowerAttack()
+            {
+                var powerAttackActivatableAbility = Resources.GetBlueprint<BlueprintActivatableAbility>("a7b339e4f6ff93a4697df5d7a87ff619");
+                powerAttackActivatableAbility.IsOnByDefault = false;
+                powerAttackActivatableAbility.DoNotTurnOffOnRest = true;
             }
         }
     }
