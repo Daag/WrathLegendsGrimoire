@@ -23,9 +23,12 @@ namespace LegendsGrimoire.Tweaks
                 Initialized = true;
                 Logger.LogHeader("Mythic Tweaks");
                 TweakCombatExpertise();
+                TweakDodge();
                 TweakDeadlyAim();
                 TweakPointBlankShot();
                 TweakPowerAttack();
+                TweakSpellFocus();
+                TweakTwoWeaponFighting();
             }
 
             public static void TweakCombatExpertise()
@@ -44,6 +47,17 @@ namespace LegendsGrimoire.Tweaks
                 var deadlyAimActivatableAbility = Resources.GetBlueprint<BlueprintActivatableAbility>("ccde5ab6edb84f346a74c17ea3e3a70c");
                 deadlyAimActivatableAbility.IsOnByDefault = false;
                 deadlyAimActivatableAbility.DoNotTurnOffOnRest = true;
+            }
+
+            public static void TweakDodge()
+            {
+                FeatUtil.Feats.Dodge.AddComponent<AddFacts>(c =>
+                {
+                    c.m_Facts = new BlueprintUnitFactReference[]
+                    {
+                        FeatUtil.Feats.Mobility.ToReference<BlueprintUnitFactReference>()
+                    };
+                });
             }
 
             public static void TweakPointBlankShot()
@@ -65,6 +79,28 @@ namespace LegendsGrimoire.Tweaks
                 var powerAttackActivatableAbility = Resources.GetBlueprint<BlueprintActivatableAbility>("a7b339e4f6ff93a4697df5d7a87ff619");
                 powerAttackActivatableAbility.IsOnByDefault = false;
                 powerAttackActivatableAbility.DoNotTurnOffOnRest = true;
+            }
+
+            public static void TweakSpellFocus()
+            {
+                FeatUtil.Feats.SpellFocus.AddComponent<AddFacts>(c =>
+                {
+                    c.m_Facts = new BlueprintUnitFactReference[]
+                    {
+                        FeatUtil.Feats.SpellFocusGreater.ToReference<BlueprintUnitFactReference>()
+                    };
+                });
+            }
+
+            public static void TweakTwoWeaponFighting()
+            {
+                FeatUtil.Feats.TwoWeaponFightingImproved.AddComponent<AddFacts>(c =>
+                {
+                    c.m_Facts = new BlueprintUnitFactReference[]
+                    {
+                        FeatUtil.Feats.TwoWeaponFightingGreater.ToReference<BlueprintUnitFactReference>()
+                    };
+                });
             }
         }
     }
