@@ -1,8 +1,6 @@
 ﻿using Kingmaker.Blueprints;
 using Kingmaker.Blueprints.Classes;
 using Kingmaker.Blueprints.Classes.Selection;
-using Kingmaker.EntitySystem.Stats;
-using Kingmaker.UnitLogic.FactLogic;
 using LegendsGrimoire.Utilities;
 using System.Linq;
 

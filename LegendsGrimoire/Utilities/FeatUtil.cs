@@ -19,6 +19,20 @@ namespace LegendsGrimoire.Utilities
             }
         }
 
+        public static class Feats
+        {
+            public static BlueprintFeature DeadlyAim => Resources.GetBlueprint<BlueprintFeature>("f47df34d53f8c904f9981a3ee8e84892");
+            public static BlueprintFeature CombatExpertise => Resources.GetBlueprint<BlueprintFeature>("4c44724ffa8844f4d9bedb5bb27d144a");
+            public static BlueprintFeature PointBlankShot => Resources.GetBlueprint<BlueprintFeature>("0da0c194d6e1d43419eb8d990b28e0ab");
+            public static BlueprintFeature PowerAttack => Resources.GetBlueprint<BlueprintFeature>("9972f33f977fc724c838e59641b2fca5");
+            public static BlueprintFeature TwoWeaponFighting => Resources.GetBlueprint<BlueprintFeature>("90e54424d682d104ab36436bd527af09");
+            public static BlueprintFeature WeaponFinesse => Resources.GetBlueprint<BlueprintFeature>("90e54424d682d104ab36436bd527af09");
+            
+
+            public static BlueprintFeature PowerAttackFeature => Resources.GetBlueprint<BlueprintFeature>("9972f33f977fc724c838e59641b2fca5");
+            public static BlueprintFeature PowerAttackFeature => Resources.GetBlueprint<BlueprintFeature>("9972f33f977fc724c838e59641b2fca5");
+        }
+
         public static class Selections
         {
             public static BlueprintFeatureSelection AasimarHeritageSelection => Resources.GetBlueprint<BlueprintFeatureSelection>("67aabcbce8f8ae643a9d08a6ca67cabd");
