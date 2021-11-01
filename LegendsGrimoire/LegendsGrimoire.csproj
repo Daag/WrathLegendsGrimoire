@@ -118,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Prerequisites\PrerequisiteGroup.cs" />
+    <Compile Include="Content\Archetypes\Dominator.cs" />
     <Compile Include="Content\Backgrounds\ArcaneTinker.cs" />
     <Compile Include="Content\Backgrounds\CunningDiplomat.cs" />
     <Compile Include="Content\Backgrounds\DivineVoice.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Tweaks\FeatTweak.cs" />
     <Compile Include="Tweaks\MetamagicTweak.cs" />
     <Compile Include="Tweaks\MythicTweak.cs" />
+    <Compile Include="Utilities\ClassUtil.cs" />
     <Compile Include="Utilities\FeatUtil.cs" />
     <Compile Include="Utilities\ItemUtil.cs" />
     <Compile Include="Utilities\PostPatchInitializeAttributes.cs" />
@@ -140,6 +142,7 @@
     <Compile Include="Utilities\ExtensionMethods.cs" />
     <Compile Include="Utilities\Helpers.cs" />
     <Compile Include="Utilities\Logger.cs" />
+    <Compile Include="Utilities\SpellUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.json">

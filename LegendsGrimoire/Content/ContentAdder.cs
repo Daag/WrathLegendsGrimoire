@@ -18,6 +18,8 @@ namespace LegendsGrimoire.Content
                 Initialized = true;
                 Logger.LogHeader("Loading New Content");
 
+                Archetypes.Dominator.AddDominator();
+
                 Backgrounds.ArcaneTinker.AddArcaneTinker();
                 Backgrounds.CunningDiplomat.AddCunningDiplomat();
                 Backgrounds.DivineVoice.AddDivineVoice();
