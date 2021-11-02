@@ -6,29 +6,33 @@ using LegendsGrimoire.Utilities;
 
 namespace LegendsGrimoire.Content.Backgrounds
 {
-    static class CunningDiplomat
+    static class CunningTinker
     {
         public readonly static BlueprintGuid AssetGuid = new BlueprintGuid(new System.Guid("ab6e180c090c47c0b8f85e9d82e30d95"));
 
-        public static void AddCunningDiplomat()
+        public static void AddCunningTinker()
         {
             var backgroundCunningDiplomat = Helpers.Create<BlueprintFeature>(bp => {
-                bp.name = "BackgroundCunningDiplomat";
+                bp.name = "BackgroundCunningTinker";
                 bp.AssetGuid = AssetGuid;
-                bp.SetName("Cunning Diplomat");
-                bp.SetDescription("The Cunning Diplomat adds {g|Encyclopedia:Persuasion}Persuasion{/g} and {g|Encyclopedia:Perception}Perception{/g} "
+                bp.SetName("Cunning Tinker");
+                bp.SetDescription("The Cunning Tinker adds {g|Encyclopedia:Persuasion}Persuasion{/g} and {g|Encyclopedia:Use_Magic_Device}Use Magic Device{/g} "
                     + "to the list of her class {g|Encyclopedia:Skills}skills{/g}. "
-                    + "Your intellect allows you to influence people. You can use your {g|Encyclopedia:Intelligence}Intelligence{/g} "
-                    + "instead of {g|Encyclopedia:Charisma}Charisma{/g} while attempting Persuasion {g|Encyclopedia:Check}checks{/g}.");
+                    + "Your intellect allows you to influence people and magic. You can use your {g|Encyclopedia:Intelligence}Intelligence{/g} "
+                    + "instead of {g|Encyclopedia:Charisma}Charisma{/g} while attempting Persuasion {g|Encyclopedia:Check}checks{/g} and {g|Encyclopedia:Use_Magic_Device}Use Magic Device{/g}.");
                 bp.Ranks = 1;
                 bp.ReapplyOnLevelUp = true;
                 bp.IsClassFeature = true;
                 bp.Groups = new FeatureGroup[] { };
                 bp.AddComponent<AddClassSkill>(c => {
-                    c.Skill = StatType.SkillPerception;
+                    c.Skill = StatType.SkillUseMagicDevice;
                 });
                 bp.AddComponent<AddBackgroundClassSkill>(c => {
-                    c.Skill = StatType.SkillPerception;
+                    c.Skill = StatType.SkillUseMagicDevice;
+                });
+                bp.AddComponent<ReplaceStatBaseAttribute>(c => {
+                    c.TargetStat = StatType.SkillUseMagicDevice;
+                    c.BaseAttributeReplacement = StatType.Intelligence;
                 });
                 bp.AddComponent<AddClassSkill>(c => {
                     c.Skill = StatType.SkillPersuasion;

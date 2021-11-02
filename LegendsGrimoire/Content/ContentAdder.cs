@@ -21,7 +21,7 @@ namespace LegendsGrimoire.Content
                 Archetypes.Dominator.AddDominator();
 
                 Backgrounds.ArcaneTinker.AddArcaneTinker();
-                Backgrounds.CunningDiplomat.AddCunningDiplomat();
+                Backgrounds.CunningTinker.AddCunningTinker();
                 Backgrounds.DivineVoice.AddDivineVoice();
                 Backgrounds.FeyTouched.AddFeyTouched();
 
