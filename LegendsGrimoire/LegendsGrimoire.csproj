@@ -120,7 +120,7 @@
     <Compile Include="Components\Prerequisites\PrerequisiteGroup.cs" />
     <Compile Include="Content\Archetypes\Dominator.cs" />
     <Compile Include="Content\Backgrounds\ArcaneTinker.cs" />
-    <Compile Include="Content\Backgrounds\CunningDiplomat.cs" />
+    <Compile Include="Content\Backgrounds\CunningTinker.cs" />
     <Compile Include="Content\Backgrounds\DivineVoice.cs" />
     <Compile Include="Content\Backgrounds\FeyTouched.cs" />
     <Compile Include="Content\ContentAdder.cs" />

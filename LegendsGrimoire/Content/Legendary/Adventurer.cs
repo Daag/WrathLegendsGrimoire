@@ -15,7 +15,7 @@ namespace LegendsGrimoire.Content.Legendary
         {
             var basicFeatsProgressionFeatures = basicFeatProgression.LevelEntries.Where(e => e.Level == 1).FirstOrDefault().m_Features;
             var basicFeatSelection = FeatUtil.Selections.BasicFeatSelection;
-            var backgroundCunningDiplomat = Resources.ModBlueprints[Backgrounds.CunningDiplomat.AssetGuid] as BlueprintFeature;
+            var backgroundCunningDiplomat = Resources.ModBlueprints[Backgrounds.CunningTinker.AssetGuid] as BlueprintFeature;
             var backgroundDivineVoice = Resources.ModBlueprints[Backgrounds.DivineVoice.AssetGuid] as BlueprintFeature;
             var backgroundFeyTouched = Resources.ModBlueprints[Backgrounds.FeyTouched.AssetGuid] as BlueprintFeature;
             var backgroundArcaneTinker = Resources.ModBlueprints[Backgrounds.ArcaneTinker.AssetGuid] as BlueprintFeature;
