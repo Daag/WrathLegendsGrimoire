@@ -1,6 +1,5 @@
 ﻿using Kingmaker.Blueprints;
 using Kingmaker.Blueprints.Classes;
-using Kingmaker.Blueprints.Classes.Prerequisites;
 using Kingmaker.Designers.Mechanics.Facts;
 using Kingmaker.EntitySystem.Stats;
 using Kingmaker.Enums;
@@ -10,13 +9,15 @@ namespace LegendsGrimoire.Content.Feats
 {
     static class BladeDancer
     {
+        public static BlueprintGuid AssetGuid = new BlueprintGuid(new System.Guid("c6398d5e497b45ef8d09cb291166af62"));
+
         public static void AddBladeDancer()
         {
             var bladeDancer = Helpers.Create<BlueprintFeature>(bp =>
             {
                 bp.name = "BladeDancer";
                 bp.SetName("Blade Dancer");
-                bp.AssetGuid = new BlueprintGuid(new System.Guid("c6398d5e497b45ef8d09cb291166af62"));
+                bp.AssetGuid = AssetGuid;
                 bp.SetDescription("You hit your enemies with precision and pinpoint strikes. You use your Dexterity instead "
                     + "of your Strength for damage on weapons you can finesse.");
                 bp.Ranks = 1;
