@@ -89,6 +89,16 @@ namespace LegendsGrimoire.Utilities
             return result;
         }
 
+        public static T[] AppendToArray<T>(this T[] array, params T[] values)
+        {
+            var len = array.Length;
+            var valueLen = values.Length;
+            var result = new T[len + valueLen];
+            Array.Copy(array, result, len);
+            Array.Copy(values, 0, result, len, valueLen);
+            return result;
+        }
+
         public static T[] RemoveFromArray<T>(this T[] array, T value)
         {
             var list = array.ToList();
