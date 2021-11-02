@@ -26,6 +26,7 @@ namespace LegendsGrimoire.Content
                 Backgrounds.FeyTouched.AddFeyTouched();
 
                 Feats.BladeDancer.AddBladeDancer();
+                Feats.CrossbowExpert.AddCrossbowExpert();
                 Feats.ProdigiousTwoWeaponFighting.AddProdigiousTwoWeaponFighting();
                 Feats.PolearmDancer.AddPolearmDancer();
                 Feats.SkillTraining.AddSkillTraining();

@@ -125,6 +125,7 @@
     <Compile Include="Content\Backgrounds\FeyTouched.cs" />
     <Compile Include="Content\ContentAdder.cs" />
     <Compile Include="Content\Feats\BladeDancer.cs" />
+    <Compile Include="Content\Feats\CrossbowExpert.cs" />
     <Compile Include="Content\Feats\PolearmDancer.cs" />
     <Compile Include="Content\Feats\ProdigiousTwoWeaponFighting.cs" />
     <Compile Include="Content\Feats\SkillTraining.cs" />
