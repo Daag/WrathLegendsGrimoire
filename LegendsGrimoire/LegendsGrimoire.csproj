@@ -137,6 +137,7 @@
     <Compile Include="Utilities\ClassUtil.cs" />
     <Compile Include="Utilities\FeatUtil.cs" />
     <Compile Include="Utilities\ItemUtil.cs" />
+    <Compile Include="Utilities\MonsterUtil.cs" />
     <Compile Include="Utilities\PostPatchInitializeAttributes.cs" />
     <Compile Include="Utilities\Resources.cs" />
     <Compile Include="Utilities\ExtensionMethods.cs" />
