@@ -132,6 +132,7 @@
     <Compile Include="Content\Legendary\Adventurer.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tweaks\BarbarianTweak.cs" />
     <Compile Include="Tweaks\FeatTweak.cs" />
     <Compile Include="Tweaks\MetamagicTweak.cs" />
     <Compile Include="Tweaks\MythicTweak.cs" />
