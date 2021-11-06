@@ -3,15 +3,21 @@ using Kingmaker.Blueprints;
 using Kingmaker.Blueprints.Classes;
 using Kingmaker.Blueprints.Classes.Spells;
 using Kingmaker.Designers.Mechanics.Facts;
+using Kingmaker.ElementsSystem;
 using Kingmaker.EntitySystem.Entities;
 using Kingmaker.Enums;
 using Kingmaker.PubSubSystem;
-using Kingmaker.RuleSystem.Rules;
+using Kingmaker.RuleSystem;
 using Kingmaker.RuleSystem.Rules.Abilities;
+using Kingmaker.RuleSystem.Rules.Damage;
 using Kingmaker.UnitLogic;
 using Kingmaker.UnitLogic.Abilities.Blueprints;
+using Kingmaker.UnitLogic.Abilities.Components;
 using Kingmaker.UnitLogic.Abilities.Components.TargetCheckers;
 using Kingmaker.UnitLogic.FactLogic;
+using Kingmaker.UnitLogic.Mechanics;
+using Kingmaker.UnitLogic.Mechanics.Actions;
+using Kingmaker.UnitLogic.Mechanics.Components;
 using Kingmaker.Utility;
 using LegendsGrimoire.Utilities;
 using System;
@@ -77,6 +83,109 @@ namespace LegendsGrimoire.Content.Archetypes
             var DominatorBonusSpellKnown8 = CreateBonusSpellKnown(SpellUtil.Spells.HoldMonsterMass, 8, new BlueprintGuid(new Guid("6f2e30eb60704c1ab3f47c6d55467106")));
             var DominatorBonusSpellKnown9 = CreateBonusSpellKnown(SpellUtil.Spells.OverwhelmingPresence, 9, new BlueprintGuid(new Guid("077a5e3cc3064ab09cca2cd8e591b7b7")));
 
+            var BatteringBlast = Resources.GetBlueprint<BlueprintAbility>("0a2f7c6aa81bc6548ac7780d8b70bcbc");
+
+            var DominatorMindThrustAbility = Helpers.Create<BlueprintAbility>(bp => {
+                bp.name = "DominatorMindThrustAbility";
+                bp.AssetGuid = new BlueprintGuid(new Guid("18d6a955da204d4ca59f4660e8b650e5"));
+                bp.SetName("Mind Thrust");
+                bp.SetDescription("Starting at 1st level, you can make a telekinetic thrust with your mind as a standard action, targeting any "
+                    + "foe within 30 feet as a ranged touch attack. The mind thrust deals 1d6 points of force damage + 1 "
+                    + "for every two sorcerer levels you possess. You deal 2d6 at 5th level, 3d6 at 11th level and 4d6 at 17th level.");
+                bp.LocalizedDuration = new Kingmaker.Localization.LocalizedString();
+                bp.LocalizedSavingThrow = new Kingmaker.Localization.LocalizedString();
+                bp.CanTargetEnemies = true;
+                bp.Range = AbilityRange.Close;
+                bp.EffectOnEnemy = AbilityEffectOnUnit.Harmful;
+                bp.Animation = Kingmaker.Visual.Animation.Kingmaker.Actions.UnitAnimationActionCastSpell.CastAnimationStyle.Directional;
+                bp.ActionType = Kingmaker.UnitLogic.Commands.Base.UnitCommand.CommandType.Standard;
+                bp.m_Icon = BatteringBlast.Icon;
+                bp.ResourceAssetIds = BatteringBlast.ResourceAssetIds;
+                bp.AddComponent<SpellComponent>(c => {
+                    c.School = SpellSchool.Evocation;
+                });
+                bp.AddComponent<SpellDescriptorComponent>(c => {
+                    c.Descriptor = SpellDescriptor.Force;
+                });
+                bp.AddComponent<AbilityDeliverProjectile>(c => {
+                    c.m_Projectiles = new BlueprintProjectileReference[] { BatteringBlast.GetComponent<AbilityDeliverProjectile>().m_Projectiles[0] };
+                    c.m_LineWidth = new Kingmaker.Utility.Feet() { m_Value = 5 };
+                    c.m_Weapon = BatteringBlast.GetComponent<AbilityDeliverProjectile>().m_Weapon;
+                    c.NeedAttackRoll = true;
+                });
+                var dealDamage = Helpers.Create<ContextActionDealDamage>(c => {
+                    c.DamageType = new DamageTypeDescription
+                    {
+                        Type = DamageType.Force,
+                    };
+                    c.Duration = new ContextDurationValue()
+                    {
+                        m_IsExtendable = true,
+                        DiceCountValue = new ContextValue(),
+                        BonusValue = new ContextValue()
+                    };
+                    c.Value = new ContextDiceValue
+                    {
+                        DiceType = DiceType.D6,
+                        DiceCountValue = new ContextValue()
+                        {
+                            ValueType = ContextValueType.Rank,
+                            ValueRank = AbilityRankType.DamageDice
+                        },
+                        BonusValue = new ContextValue
+                        {
+                            ValueType = ContextValueType.Rank,
+                            ValueRank = AbilityRankType.DamageBonus
+                        }
+                    };
+                });
+                bp.AddComponent<AbilityEffectRunAction>(c => {
+                    c.Actions = new ActionList();
+                    c.Actions.Actions = new GameAction[] { dealDamage };
+                });
+                bp.AddComponent<ContextRankConfig>(c => {
+                    c.m_Type = AbilityRankType.StatBonus;
+                    c.m_BaseValueType = ContextRankBaseValueType.ClassLevel;
+                    c.m_Progression = ContextRankProgression.Div2;
+                    c.m_StartLevel = 1;
+                    c.m_StepLevel = 2;
+                    c.m_Max = 20;
+                    c.m_Min = 1;
+                    c.m_UseMin = true;
+                    c.m_Class = new BlueprintCharacterClassReference[] { ClassUtil.Classes.Arcanist.ToReference<BlueprintCharacterClassReference>() };
+                });
+                bp.AddComponent<ContextRankConfig>(c => {
+                    c.m_Type = AbilityRankType.DamageDice;
+                    c.m_BaseValueType = ContextRankBaseValueType.ClassLevel;
+                    c.m_Progression = ContextRankProgression.DelayedStartPlusDivStep;
+                    c.m_StartLevel = -1;
+                    c.m_StepLevel = 6;
+                    c.m_Max = 20;
+                    c.m_Min = 1;
+                    c.m_UseMin = true;
+                    c.m_Class = new BlueprintCharacterClassReference[] { ClassUtil.Classes.Arcanist.ToReference<BlueprintCharacterClassReference>() };
+                });
+            });
+            Resources.AddBlueprint(DominatorMindThrustAbility);
+
+            var DominatorMindThrust = Helpers.Create<BlueprintFeature>(bp => {
+                bp.name = "DominatorMindThrust";
+                bp.AssetGuid = new BlueprintGuid(new Guid("e875565d069d437781677e1ee5cd52ba"));
+                bp.SetName("Mind Thrust");
+                bp.SetDescription("Starting at 1st level, you can make a telekinetic thrust with your mind as a standard action, targeting any "
+                    + "foe within 30 feet as a ranged touch attack. The mind thrust deals 1d6 points of force damage + 1 "
+                    + "for every two sorcerer levels you possess. You deal 2d6 at 5th level, 3d6 at 11th level and 4d6 at 17th level.");
+                bp.AddComponent<AddFacts>(c => {
+                    c.m_Facts = new BlueprintUnitFactReference[] {
+                        DominatorMindThrustAbility.ToReference<BlueprintUnitFactReference>(),
+                    };
+                });
+                bp.IsClassFeature = true;
+                bp.Ranks = 1;
+                bp.m_Icon = DominatorMindThrustAbility.Icon;
+            });
+            Resources.AddBlueprint(DominatorMindThrust);
+
             Resources.AddBlueprint(DominatorPierceImmunityAll);
             
             var DominatorArchetype = Helpers.Create<BlueprintArchetype>(bp =>
@@ -94,7 +203,7 @@ namespace LegendsGrimoire.Content.Archetypes
                 };
                 bp.AddFeatures = new LevelEntry[]
                 {
-                    new LevelEntry { Level = 1, Features = { DominatorFocus } },
+                    new LevelEntry { Level = 1, Features = { DominatorFocus, DominatorMindThrust } },
                     new LevelEntry { Level = 2, Features = { DominatorBonusSpellKnown1 } },
                     new LevelEntry { Level = 3, Features = { DominatorPierceImmunityAnimal, DominatorPierceImmunityVermin } },
                     new LevelEntry { Level = 4, Features = { DominatorBonusSpellKnown2 } },
@@ -121,6 +230,7 @@ namespace LegendsGrimoire.Content.Archetypes
             ClassUtil.Classes.Arcanist.Progression.UIGroups = ClassUtil.Classes.Arcanist.Progression.UIGroups.AppendToArray(
                 Helpers.CreateUIGroup(
                     DominatorFocus,
+                    DominatorMindThrust,
                     DominatorPierceImmunityAnimal,
                     DominatorPierceImmunityVermin,
                     DominatorPierceImmunityMagicalBeast,
@@ -201,6 +311,16 @@ namespace LegendsGrimoire.Content.Archetypes
                     || (caster.HasFact(DominatorPierceImmunityVermin) && target.HasFact(MonsterUtil.CreatureTypes.Vermin))
                     || (caster.HasFact(DominatorPierceImmunityAll));
         }
+
+        public static bool ShouldPierceImmunity(UnitEntityData caster, UnitEntityData target)
+        {
+            return (target.HasFact(MonsterUtil.CreatureTypes.Aberration) || target.HasFact(MonsterUtil.CreatureTypes.Animal)
+                || target.HasFact(MonsterUtil.CreatureTypes.Construct) || target.HasFact(MonsterUtil.CreatureTypes.Dragon)
+                || target.HasFact(MonsterUtil.CreatureTypes.Fey) || target.HasFact(MonsterUtil.CreatureTypes.MagicalBeast)
+                || target.HasFact(MonsterUtil.CreatureTypes.MonstrousHumanoid) || target.HasFact(MonsterUtil.CreatureTypes.Outsider)
+                || target.HasFact(MonsterUtil.CreatureTypes.Plant) || target.HasFact(MonsterUtil.CreatureTypes.Undead)
+                || target.HasFact(MonsterUtil.CreatureTypes.Vermin)) || caster.HasFact(DominatorPierceImmunityAll);
+        }
     }
 
     public class DominatorDomination : UnitFactComponentDelegate,
@@ -228,7 +348,7 @@ namespace LegendsGrimoire.Content.Archetypes
                 if (target == null || caster == null) return;
                 var isPiercedImmunity = Dominator.IsImmunityPierced(caster, target);
 
-                if (isPiercedImmunity)
+                if (isPiercedImmunity && Dominator.ShouldPierceImmunity(caster, target))
                 {
                     context.RemoveSpellDescriptor(SpellDescriptor.Charm);
                     context.RemoveSpellDescriptor(SpellDescriptor.Compulsion);
@@ -253,7 +373,7 @@ namespace LegendsGrimoire.Content.Archetypes
             var blueprintAbility = __instance.OwnerBlueprint as BlueprintAbility;
             if (caster == null || target?.Unit == null || blueprintAbility == null) return;
             var spellComponent = blueprintAbility.GetComponents<SpellComponent>().FirstOrDefault();
-            if (spellComponent?.School == SpellSchool.Enchantment)
+            if (spellComponent?.School == SpellSchool.Enchantment && Dominator.ShouldPierceImmunity(caster, target.Unit))
                 __result = Dominator.IsImmunityPierced(caster, target.Unit);
         }
     }
@@ -267,7 +387,7 @@ namespace LegendsGrimoire.Content.Archetypes
             var blueprintAbility = __instance.OwnerBlueprint as BlueprintAbility;
             if (caster == null || target?.Unit == null || blueprintAbility == null) return;
             var spellComponent = blueprintAbility.GetComponents<SpellComponent>().FirstOrDefault();
-            if (spellComponent?.School == SpellSchool.Enchantment)
+            if (spellComponent?.School == SpellSchool.Enchantment && Dominator.ShouldPierceImmunity(caster, target.Unit))
                 __result = Dominator.IsImmunityPierced(caster, target.Unit);
         }
     }
