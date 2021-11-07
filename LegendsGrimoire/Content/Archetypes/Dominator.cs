@@ -8,6 +8,7 @@ using Kingmaker.EntitySystem.Entities;
 using Kingmaker.Enums;
 using Kingmaker.PubSubSystem;
 using Kingmaker.RuleSystem;
+using Kingmaker.RuleSystem.Rules;
 using Kingmaker.RuleSystem.Rules.Abilities;
 using Kingmaker.RuleSystem.Rules.Damage;
 using Kingmaker.UnitLogic;
@@ -325,31 +326,82 @@ namespace LegendsGrimoire.Content.Archetypes
 
     public class DominatorDomination : UnitFactComponentDelegate,
                                        //IBeforeRulebookEventTriggerHandler<RuleCastSpell>,
-                                       //IBeforeRulebookEventTriggerHandler<RuleCanApplyBuff>,
                                        IGlobalSubscriber,
                                        ISubscriber,
                                        IInitiatorRulebookHandler<RuleCastSpell>, 
                                        IRulebookHandler<RuleCastSpell>,
+                                       IInitiatorRulebookHandler<RuleCanApplyBuff>,
+                                       IRulebookHandler<RuleCanApplyBuff>,
                                        IInitiatorRulebookSubscriber
 
     {
         public void OnEventAboutToTrigger(RuleCastSpell evt)
         {
-            Logger.Log("OnEventAboutToTrigger::Triggered - Rule Cast Spell");
+            //var context = evt.Context;
+            //var sourceAbilityContext = context.SourceAbilityContext;
+            //Logger.Log("OnEventAboutToTrigger RuleCastSpell: SpellSchool(" + sourceAbilityContext?.SpellSchool + ")");
+            //if (sourceAbilityContext?.SpellSchool == SpellSchool.Enchantment)
+            //{
+            //    var caster = context.Caster;
+            //    Logger.Log("OnEventAboutToTrigger RuleCastSpell: caster(" + caster.CharacterName + ")");
+            //    var target = context.MainTarget?.Unit;
+                
+            //    Logger.Log("OnEventAboutToTrigger RuleCastSpell: target(" + target.CharacterName + ")");
+            //    if (target == null || caster == null) return;
+            //    var isPiercedImmunity = Dominator.IsImmunityPierced(caster, target);
+
+            //    if (isPiercedImmunity && Dominator.ShouldPierceImmunity(caster, target))
+            //    {
+            //        context.RemoveSpellDescriptor(SpellDescriptor.Charm);
+            //        context.RemoveSpellDescriptor(SpellDescriptor.Compulsion);
+            //        context.RemoveSpellDescriptor(SpellDescriptor.Confusion);
+            //        context.RemoveSpellDescriptor(SpellDescriptor.Daze);
+            //        context.RemoveSpellDescriptor(SpellDescriptor.Emotion);
+            //        context.RemoveSpellDescriptor(SpellDescriptor.Fear);
+            //        context.RemoveSpellDescriptor(SpellDescriptor.MindAffecting);
+            //        context.RemoveSpellDescriptor(SpellDescriptor.NegativeEmotion);
+            //        context.RemoveSpellDescriptor(SpellDescriptor.Sleep);
+            //        context.RemoveSpellDescriptor(SpellDescriptor.Stun);
+            //    }
+            //}
+        }
+
+        public void OnEventAboutToTrigger(RuleCanApplyBuff evt)
+        {
+            //var context = evt.Context;
+            //var sourceAbilityContext = context.SourceAbilityContext;
+            //Logger.Log("OnEventAboutToTrigger RuleCanApplyBuff: SpellSchool(" + sourceAbilityContext?.SpellSchool + ")");
+            //if (context?.SpellSchool == SpellSchool.Enchantment)
+            //{
+            //    var caster = context.MaybeCaster;
+            //    var target = context.MainTarget?.Unit;
+            //    if (target == null || caster == null) return;
+            //    Logger.Log("OnEventAboutToTrigger RuleCanApplyBuff: target(" + target?.CharacterName + ")");
+            //    Logger.Log("OnEventAboutToTrigger RuleCanApplyBuff: caster(" + caster?.CharacterName + ")");
+            //    var isPiercedImmunity = Dominator.IsImmunityPierced(caster, target);
+            //    if (isPiercedImmunity && Dominator.ShouldPierceImmunity(caster, target))
+            //    {
+            //        evt.IgnoreImmunity = true;
+            //        evt.Immunity = false;
+            //    }
+            //}
         }
 
         public void OnEventDidTrigger(RuleCastSpell evt)
         {
             var context = evt.Context;
+            Logger.Log("OnEventDidTrigger RuleCastSpell: SpellSchool(" + context?.SpellSchool + ")");
             if (context?.SpellSchool == SpellSchool.Enchantment)
             {
                 var caster = context.Caster;
-                var target = context.MainTarget?.Unit;
-                if (target == null || caster == null) return;
-                var isPiercedImmunity = Dominator.IsImmunityPierced(caster, target);
+                Logger.Log("OnEventAboutToTrigger RuleCastSpell: caster(" + caster.CharacterName + ")");
+                //var target = context.MainTarget?.Unit;
+                //Logger.Log("OnEventDidTrigger RuleCastSpell: target(" + target.CharacterName + ")");
+                //if (target == null || caster == null) return;
+                //var isPiercedImmunity = Dominator.IsImmunityPierced(caster, target);
 
-                if (isPiercedImmunity && Dominator.ShouldPierceImmunity(caster, target))
-                {
+                //if (isPiercedImmunity && Dominator.ShouldPierceImmunity(caster, target))
+                //{
                     context.RemoveSpellDescriptor(SpellDescriptor.Charm);
                     context.RemoveSpellDescriptor(SpellDescriptor.Compulsion);
                     context.RemoveSpellDescriptor(SpellDescriptor.Confusion);
@@ -359,8 +411,15 @@ namespace LegendsGrimoire.Content.Archetypes
                     context.RemoveSpellDescriptor(SpellDescriptor.MindAffecting);
                     context.RemoveSpellDescriptor(SpellDescriptor.NegativeEmotion);
                     context.RemoveSpellDescriptor(SpellDescriptor.Sleep);
-                }
+                    context.RemoveSpellDescriptor(SpellDescriptor.Stun);
+                //}
             }
+        }
+
+        public void OnEventDidTrigger(RuleCanApplyBuff evt)
+        {
+            Logger.Log("OnEventDidTrigger::Triggered - Rule Can Apply Buff");
+            evt.CanApply = true;
         }
     }
 
@@ -391,4 +450,25 @@ namespace LegendsGrimoire.Content.Archetypes
                 __result = Dominator.IsImmunityPierced(caster, target.Unit);
         }
     }
+
+    //[HarmonyPatch(typeof(BuffDescriptorImmunity), "IsImmune")]
+    //[HarmonyPriority(Priority.Last)]
+    //static class BuffDescriptorImmunity_IsImmune_Patch
+    //{
+    //    static void Postfix(BuffDescriptorImmunity __instance, MechanicsContext context, ref bool __result)
+    //    {
+    //        var caster = context.MaybeCaster;
+    //        var target = context.MainTarget.Unit;
+    //        var sourceAbility = context.SourceAbilityContext;
+    //        Logger.Log("BuffDescriptorImmunity_IsImmune_Patch: target(" + target?.CharacterName + ")");
+    //        Logger.Log("BuffDescriptorImmunity_IsImmune_Patch: caster(" + caster?.CharacterName + ")");
+    //        if (caster == null || target == null || sourceAbility == null) return;
+    //        Logger.Log("BuffDescriptorImmunity_IsImmune_Patch: SpellSchool(" + context?.SpellSchool + ")");
+    //        if (sourceAbility?.SpellSchool == SpellSchool.Enchantment && Dominator.ShouldPierceImmunity(caster, target))
+    //        {
+    //            Logger.Log("Skipping immunity");
+    //            __result = false;
+    //        }
+    //    }
+    //}
 }
