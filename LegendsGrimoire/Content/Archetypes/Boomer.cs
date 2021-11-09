@@ -297,7 +297,7 @@ namespace LegendsGrimoire.Content.Archetypes
                     c.CappedOnMultiplier = false;
                 }));
             });
-            Resources.AddBlueprint(BoomerBlastingFocus);
+            Resources.AddBlueprint(BoomerSpeedOfSound);
 
             var BoomerArchetype = Helpers.Create<BlueprintArchetype>(bp =>
             {
