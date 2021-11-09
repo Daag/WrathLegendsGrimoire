@@ -19,6 +19,7 @@ namespace LegendsGrimoire.Content
                 Logger.LogHeader("Loading New Content");
 
                 Archetypes.Dominator.AddDominator();
+                Archetypes.Boomer.AddBoomer();
 
                 Backgrounds.ArcaneTinker.AddArcaneTinker();
                 Backgrounds.CunningTinker.AddCunningTinker();

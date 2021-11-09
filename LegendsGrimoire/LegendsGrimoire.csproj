@@ -117,7 +117,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\BoomerDamageSubstitution.cs" />
     <Compile Include="Components\Prerequisites\PrerequisiteGroup.cs" />
+    <Compile Include="Content\Archetypes\Boomer.cs" />
     <Compile Include="Content\Archetypes\Dominator.cs" />
     <Compile Include="Content\Backgrounds\ArcaneTinker.cs" />
     <Compile Include="Content\Backgrounds\CunningTinker.cs" />
