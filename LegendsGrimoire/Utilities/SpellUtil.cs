@@ -22,6 +22,18 @@ namespace LegendsGrimoire.Utilities
             public static BlueprintAbility Insanity => Resources.GetBlueprint<BlueprintAbility>("2b044152b3620c841badb090e01ed9de");
             public static BlueprintAbility OverwhelmingGrief => Resources.GetBlueprint<BlueprintAbility>("dd2918e4a77c50044acba1ac93494c36");
             public static BlueprintAbility OverwhelmingPresence => Resources.GetBlueprint<BlueprintAbility>("41cf93453b027b94886901dbfc680cb9");
+
+            //Evocation
+            public static BlueprintAbility BatteringBlast => Resources.GetBlueprint<BlueprintAbility>("0a2f7c6aa81bc6548ac7780d8b70bcbc");
+            public static BlueprintAbility EarPiercingScream => Resources.GetBlueprint<BlueprintAbility>("8e7cfa5f213a90549aadd18f8f6f4664");
+            public static BlueprintAbility ChainLightning => Resources.GetBlueprint<BlueprintAbility>("645558d63604747428d55f0dd3a4cb58");
+            public static BlueprintAbility IcyPrison => Resources.GetBlueprint<BlueprintAbility>("65e8d23aef5e7784dbeb27b1fca40931");
+            public static BlueprintAbility IcyPrisonMass => Resources.GetBlueprint<BlueprintAbility>("1852a9393a23d5741b650a1ea7078abc");
+            public static BlueprintAbility KiShout => Resources.GetBlueprint<BlueprintAbility>("5c8cde7f0dcec4e49bfa2632dfe2ecc0");
+            public static BlueprintAbility LightningBolt => Resources.GetBlueprint<BlueprintAbility>("d2cff9243a7ee804cb6d5be47af30c73");
+            public static BlueprintAbility Shout => Resources.GetBlueprint<BlueprintAbility>("f09453607e683784c8fca646eec49162");
+            public static BlueprintAbility ShoutGreater => Resources.GetBlueprint<BlueprintAbility>("fd0d3840c48cafb44bb29e8eb74df204");
+            public static BlueprintAbility SoundBurst => Resources.GetBlueprint<BlueprintAbility>("c3893092a333b93499fd0a21845aa265");
         }
     }
 }
