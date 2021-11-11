@@ -16,6 +16,8 @@ namespace LegendsGrimoire.Components
     [TypeId("0c067d07-c385-4676-b061-6eff9cbef45d")]
     public class BoomerDamageSubstitution : UnitFactComponentDelegate, IInitiatorRulebookHandler<RuleCastSpell>, IRulebookHandler<RuleCastSpell>, ISubscriber, IInitiatorRulebookSubscriber, IInitiatorRulebookHandler<RulePrepareDamage>, IRulebookHandler<RulePrepareDamage>
     {
+        public SpellDescriptor EnergyType = SpellDescriptor.Sonic;
+
         public void OnEventAboutToTrigger(RulePrepareDamage evt)
         {
         }
@@ -42,7 +44,7 @@ namespace LegendsGrimoire.Components
                 var energyDamage = baseDamage as EnergyDamage;
                 if (energyDamage != null)
                 {
-                    energyDamage.ReplaceEnergy(DamageEnergyType.Sonic);
+                    energyDamage.ReplaceEnergy(getDamageType(EnergyType));
                 }
             }
         }
@@ -54,7 +56,27 @@ namespace LegendsGrimoire.Components
             context.RemoveSpellDescriptor(SpellDescriptor.Cold);
             context.RemoveSpellDescriptor(SpellDescriptor.Acid);
             context.RemoveSpellDescriptor(SpellDescriptor.Electricity);
-            context.AddSpellDescriptor(SpellDescriptor.Sonic);
+            context.RemoveSpellDescriptor(SpellDescriptor.Sonic);
+            context.AddSpellDescriptor(EnergyType);
+        }
+
+        private DamageEnergyType getDamageType(SpellDescriptor energyType)
+        {
+            switch (energyType)
+            {
+                case SpellDescriptor.Fire:
+                    return DamageEnergyType.Fire;
+                case SpellDescriptor.Acid:
+                    return DamageEnergyType.Acid;
+                case SpellDescriptor.Cold:
+                    return DamageEnergyType.Cold;
+                case SpellDescriptor.Electricity:
+                    return DamageEnergyType.Electricity;
+                case SpellDescriptor.Sonic:
+                    return DamageEnergyType.Sonic;
+                default:
+                    return DamageEnergyType.Fire;
+            }
         }
     }
 }

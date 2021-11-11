@@ -44,6 +44,28 @@ namespace LegendsGrimoire.Content.Backgrounds
                 bp.AddComponent<AddBackgroundClassSkill>(c => {
                     c.Skill = StatType.SkillPersuasion;
                 });
+                bp.AddComponent<ReplaceStatBaseAttribute>(c =>
+                {
+                    c.TargetStat = StatType.SkillLoreNature;
+                    c.BaseAttributeReplacement = StatType.Intelligence;
+                });
+                bp.AddComponent<ReplaceStatBaseAttribute>(c =>
+                {
+                    c.TargetStat = StatType.SkillLoreReligion;
+                    c.BaseAttributeReplacement = StatType.Intelligence;
+                });
+                bp.AddComponent<AddBackgroundClassSkill>(c => {
+                    c.Skill = StatType.SkillKnowledgeArcana;
+                });
+                bp.AddComponent<AddBackgroundClassSkill>(c => {
+                    c.Skill = StatType.SkillKnowledgeWorld;
+                });
+                bp.AddComponent<AddBackgroundClassSkill>(c => {
+                    c.Skill = StatType.SkillLoreNature;
+                });
+                bp.AddComponent<AddBackgroundClassSkill>(c => {
+                    c.Skill = StatType.SkillLoreReligion;
+                });
             });
             Resources.AddBlueprint(backgroundCunningDiplomat);
         }

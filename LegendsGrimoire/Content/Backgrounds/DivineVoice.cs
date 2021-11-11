@@ -40,6 +40,16 @@ namespace LegendsGrimoire.Content.Backgrounds
                 bp.AddComponent<AddBackgroundClassSkill>(c => {
                     c.Skill = StatType.SkillPersuasion;
                 });
+                bp.AddComponent<ReplaceStatBaseAttribute>(c =>
+                {
+                    c.TargetStat = StatType.SkillKnowledgeArcana;
+                    c.BaseAttributeReplacement = StatType.Wisdom;
+                });
+                bp.AddComponent<ReplaceStatBaseAttribute>(c =>
+                {
+                    c.TargetStat = StatType.SkillKnowledgeWorld;
+                    c.BaseAttributeReplacement = StatType.Wisdom;
+                });
             });
             Resources.AddBlueprint(backgroundDivineVoice);
         }
