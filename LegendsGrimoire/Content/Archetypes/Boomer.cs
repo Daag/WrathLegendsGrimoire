@@ -31,104 +31,156 @@ namespace LegendsGrimoire.Content.Archetypes
 
         public static void AddBoomer()
         {
-            var EarPiercingScream = SpellUtil.Spells.EarPiercingScream;
-            var SoundBurst = SpellUtil.Spells.SoundBurst;
-            var LightningBolt = SpellUtil.Spells.LightningBolt;
-            var Shout = SpellUtil.Spells.Shout;
-            var IcyPrison = SpellUtil.Spells.IcyPrison;
-            var ChainLightning = SpellUtil.Spells.ChainLightning;
-            var KiShout = SpellUtil.Spells.KiShout;
-            var ShoutGreater = SpellUtil.Spells.ShoutGreater;
-            var IcyPrisonMass = SpellUtil.Spells.IcyPrisonMass;
-
-            var BoomerDamageSubstitutionBuff = Helpers.Create<BlueprintBuff>(bp =>
+            var BoomerSpellSlots = Helpers.Create<BlueprintSpellsTable>(bp =>
             {
-                bp.name = "BoomerDamageSubstitutionBuff";
-                bp.AssetGuid = new BlueprintGuid(new Guid("363dd97b908d42d794fd7cff49bc80ea"));
-                bp.SetName("Boomer Substitution");
-                bp.SetDescription("All {g|Encyclopedia:Spell}spells{/g} that deal {g|Encyclopedia:Energy_Damage}energy damage{/g} that you cast will "
-                    + "deal sonic {g|Encyclopedia:Damage}damage{/g} instead. This also changes the spell's type to a sonic spell.");
-                bp.FxOnStart = new PrefabLink();
-                bp.FxOnRemove = new PrefabLink();
-                bp.IsClassFeature = true;
-                bp.m_Flags = BlueprintBuff.Flags.StayOnDeath;
-                bp.m_Icon = SoundBurst.Icon;
-                bp.AddComponent<BoomerDamageSubstitution>();
+                bp.name = "BoomerSpellslots";
+                bp.AssetGuid = new BlueprintGuid(new Guid("8fee74580c7b49569e7d8512b733bf48"));
+                bp.Levels = new SpellsLevelEntry[]
+                {
+                    new SpellsLevelEntry() { Count = new int[0] },
+                    new SpellsLevelEntry() { Count = new int[] { 0, 3 } },
+                    new SpellsLevelEntry() { Count = new int[] { 0, 3 } },
+                    new SpellsLevelEntry() { Count = new int[] { 0, 4 } },
+                    new SpellsLevelEntry() { Count = new int[] { 0, 4, 2 } },
+                    new SpellsLevelEntry() { Count = new int[] { 0, 5, 3 } },
+                    new SpellsLevelEntry() { Count = new int[] { 0, 5, 3, 2 } },
+                    new SpellsLevelEntry() { Count = new int[] { 0, 6, 4, 3 } },
+                    new SpellsLevelEntry() { Count = new int[] { 0, 6, 4, 3, 2 } },
+                    new SpellsLevelEntry() { Count = new int[] { 0, 6, 5, 4, 3 } },
+                    new SpellsLevelEntry() { Count = new int[] { 0, 6, 5, 4, 3, 2 } },
+                    new SpellsLevelEntry() { Count = new int[] { 0, 6, 6, 5, 4, 3 } },
+                    new SpellsLevelEntry() { Count = new int[] { 0, 6, 6, 5, 4, 3, 2 } },
+                    new SpellsLevelEntry() { Count = new int[] { 0, 6, 6, 5, 5, 4, 3 } },
+                    new SpellsLevelEntry() { Count = new int[] { 0, 6, 6, 5, 5, 4, 3, 2 } },
+                    new SpellsLevelEntry() { Count = new int[] { 0, 6, 6, 5, 5, 5, 4, 3 } },
+                    new SpellsLevelEntry() { Count = new int[] { 0, 6, 6, 5, 5, 5, 4, 3, 2 } },
+                    new SpellsLevelEntry() { Count = new int[] { 0, 6, 6, 5, 5, 5, 4, 4, 3 } },
+                    new SpellsLevelEntry() { Count = new int[] { 0, 6, 6, 5, 5, 5, 4, 4, 3, 2 } },
+                    new SpellsLevelEntry() { Count = new int[] { 0, 6, 6, 5, 5, 5, 4, 4, 4, 3 } },
+                    new SpellsLevelEntry() { Count = new int[] { 0, 6, 6, 5, 5, 5, 4, 4, 4, 4 } }
+                };
             });
-            Resources.AddBlueprint(BoomerDamageSubstitutionBuff);
+            Resources.AddBlueprint(BoomerSpellSlots);
 
-            var BoomerDamageSubstitutionActivatableAbility = Helpers.Create<BlueprintActivatableAbility>(bp =>
+            var BoomerSpellbook = Helpers.Create<BlueprintSpellbook>(bp =>
             {
-                bp.name = "BoomerDamageSubstitutionAbility";
-                bp.AssetGuid = new BlueprintGuid(new Guid("687c4e0afe14473a9acbeae0378c8557"));
-                bp.SetName(BoomerDamageSubstitutionBuff.Name);
-                bp.SetDescription(BoomerDamageSubstitutionBuff.Description);
-                bp.m_Buff = BoomerDamageSubstitutionBuff.ToReference<BlueprintBuffReference>();
-                bp.IsOnByDefault = false;
-                bp.DoNotTurnOffOnRest = true;
-                bp.DeactivateImmediately = true;
-                bp.m_Icon = SoundBurst.Icon;
+                bp.name = "BoomerSpellbook";
+                bp.AssetGuid = new BlueprintGuid(new Guid("18d00350dac642438dd79440763dec67"));
+                bp.Name = ClassUtil.Classes.Arcanist.Spellbook.Name;
+                bp.CastingAttribute = ClassUtil.Classes.Arcanist.Spellbook.CastingAttribute;
+                bp.m_SpellsPerDay = ClassUtil.Classes.Arcanist.Spellbook.m_SpellsPerDay;
+                bp.m_SpellSlots = BoomerSpellSlots.ToReference<BlueprintSpellsTableReference>();
+                bp.m_SpellList = ClassUtil.Classes.Arcanist.Spellbook.m_SpellList;
+                bp.m_CharacterClass = ClassUtil.Classes.Arcanist.ToReference<BlueprintCharacterClassReference>();
+                bp.Spontaneous = true;
+                bp.SpellsPerLevel = 2;
+                bp.CanCopyScrolls = true;
+                bp.IsArcane = true;
+                bp.IsArcanist = true;
             });
-            Resources.AddBlueprint(BoomerDamageSubstitutionActivatableAbility);
+            Resources.AddBlueprint(BoomerSpellbook);
+
+            var ElementalAirArcana = Resources.GetBlueprint<BlueprintActivatableAbility>("5f6315dfeb74a564f96f460d72f7206c");
+            var ElementalEarthArcana = Resources.GetBlueprint<BlueprintActivatableAbility>("94ce51ed666fc8d42830aa9fe48897f9");
+            var ElementalFireArcana = Resources.GetBlueprint<BlueprintActivatableAbility>("924dfcd481c0be54c959c2846b3fb7da");
+            var ElementalWaterArcana = Resources.GetBlueprint<BlueprintActivatableAbility>("dd484f0706325de40aee5dba15fbce45");
+
+            var BoomerDamageSubstitutionSonicBuff = CreateSubstitutionBuff(
+                "Sonic", 
+                new BlueprintGuid(new Guid("adf135214f74437c8a10aa30d15e2970")), 
+                SpellUtil.Spells.SoundBurst.Icon, 
+                SpellDescriptor.Sonic
+            );
+            var BoomerDamageSubstitutionAcidBuff = CreateSubstitutionBuff(
+                "Acid",
+                new BlueprintGuid(new Guid("363dd97b908d42d794fd7cff49bc80ea")),
+                ElementalEarthArcana.Icon,
+                SpellDescriptor.Acid
+            );
+            var BoomerDamageSubstitutionColdBuff = CreateSubstitutionBuff(
+                "Cold",
+                new BlueprintGuid(new Guid("3e819f0626984e188eca6cb3cca5e686")),
+                ElementalWaterArcana.Icon,
+                SpellDescriptor.Cold
+            );
+            var BoomerDamageSubstitutionElectricityBuff = CreateSubstitutionBuff(
+                "Electricity",
+                new BlueprintGuid(new Guid("eb96ab1897c04568bf60728af32170ec")),
+                ElementalAirArcana.Icon,
+                SpellDescriptor.Electricity
+            );
+            var BoomerDamageSubstitutionFireBuff = CreateSubstitutionBuff(
+                "Fire",
+                new BlueprintGuid(new Guid("c7afedad488f49df961a66d12c53c653")),
+                ElementalFireArcana.Icon,
+                SpellDescriptor.Fire
+            );
+
+            var BoomerDamageSubstitutionSonicActivatableAbility = CreateSubstituteActivatableAbility(
+                "Sonic",
+                BoomerDamageSubstitutionSonicBuff.Name,
+                BoomerDamageSubstitutionSonicBuff.Description,
+                new BlueprintGuid(new Guid("687c4e0afe14473a9acbeae0378c8557")),
+                BoomerDamageSubstitutionSonicBuff,
+                BoomerDamageSubstitutionSonicBuff.Icon
+            );
+            var BoomerDamageSubstitutionAcidActivatableAbility = CreateSubstituteActivatableAbility(
+                "Acid",
+                BoomerDamageSubstitutionAcidBuff.Name,
+                BoomerDamageSubstitutionAcidBuff.Description,
+                new BlueprintGuid(new Guid("292be60e0a1e47c69d12b8a78f817ebb")),
+                BoomerDamageSubstitutionAcidBuff,
+                BoomerDamageSubstitutionAcidBuff.Icon
+            );
+            var BoomerDamageSubstitutionColdActivatableAbility = CreateSubstituteActivatableAbility(
+                "Cold",
+                BoomerDamageSubstitutionColdBuff.Name,
+                BoomerDamageSubstitutionColdBuff.Description,
+                new BlueprintGuid(new Guid("55c7b8e1ac9d4a54aac49a5703ee3b87")),
+                BoomerDamageSubstitutionColdBuff,
+                BoomerDamageSubstitutionColdBuff.Icon
+            );
+            var BoomerDamageSubstitutionElectricityActivatableAbility = CreateSubstituteActivatableAbility(
+                "Electricity",
+                BoomerDamageSubstitutionElectricityBuff.Name,
+                BoomerDamageSubstitutionElectricityBuff.Description,
+                new BlueprintGuid(new Guid("4e2b2b920dd5494e87595328d285cd20")),
+                BoomerDamageSubstitutionElectricityBuff,
+                BoomerDamageSubstitutionElectricityBuff.Icon
+            );
+            var BoomerDamageSubstitutionFireActivatableAbility = CreateSubstituteActivatableAbility(
+                "Fire",
+                BoomerDamageSubstitutionFireBuff.Name,
+                BoomerDamageSubstitutionFireBuff.Description,
+                new BlueprintGuid(new Guid("938d0cc476d5493e9f8d74f8433fb111")),
+                BoomerDamageSubstitutionFireBuff,
+                BoomerDamageSubstitutionFireBuff.Icon
+            );
 
             var BoomerBomb = Helpers.Create<BlueprintFeature>(bp =>
             {
                 bp.name = "BoomerBomb";
                 bp.AssetGuid = new BlueprintGuid(new Guid("14f59c9b722f4787a559f7873d102763"));
                 bp.SetName("Boomber Bomb");
-                bp.SetDescription(BoomerDamageSubstitutionBuff.Description + "/n"
-                    + "Whenever you cast a {g|Encyclopedia:Spell}spell{/g} with {g|Encyclopedia:Energy_Damage}sonic damage{/g}, that spell deals +2 "
+                bp.SetDescription("You can change spells you cast to any energy type among acid, cold, electricity, fire and sonic." + "\n"
+                    + "Whenever you cast a {g|Encyclopedia:Spell}spell{/g} with {g|Encyclopedia:Energy_Damage}energy damage{/g}, that spell deals +2 "
                     + "point of {g|Encyclopedia:Damage}damage{/g} per die {g|Encyclopedia:Dice}rolled{/g}.");
                 bp.IsClassFeature = true;
-                bp.Ranks = 1;
+                bp.Ranks = 5;
                 bp.AddComponent(Helpers.Create<AddFacts>(c =>
                 {
                     c.m_Facts = new BlueprintUnitFactReference[]
                     {
-                        BoomerDamageSubstitutionActivatableAbility.ToReference<BlueprintUnitFactReference>()
+                        BoomerDamageSubstitutionSonicActivatableAbility.ToReference<BlueprintUnitFactReference>(),
+                        BoomerDamageSubstitutionAcidActivatableAbility.ToReference<BlueprintUnitFactReference>(),
+                        BoomerDamageSubstitutionColdActivatableAbility.ToReference<BlueprintUnitFactReference>(),
+                        BoomerDamageSubstitutionElectricityActivatableAbility.ToReference<BlueprintUnitFactReference>(),
+                        BoomerDamageSubstitutionFireActivatableAbility.ToReference<BlueprintUnitFactReference>()
                     };
                 }));
                 bp.AddComponent<BoomerBombDamage>();
             });
             Resources.AddBlueprint(BoomerBomb);
-
-            var BoomerConversionSpells = Helpers.Create<BlueprintFeature>(bp =>
-            {
-                bp.name = "BoomerConversionSpellsFeature";
-                bp.AssetGuid = new BlueprintGuid(new Guid("38c1869554a547c89e73dd39f4a15b81"));
-                bp.SetName("Sonic Spells");
-                bp.SetDescription("Your boomer mastery over sound, lets you convert your spell slots to specific sound based spells.");
-                bp.IsClassFeature = true;
-                bp.Ranks = 1;
-                bp.AddComponent(Helpers.Create<SpontaneousSpellConversion>(c =>
-                {
-                    c.m_CharacterClass = ClassUtil.Classes.Arcanist.ToReference<BlueprintCharacterClassReference>();
-                    c.m_SpellsByLevel = new BlueprintAbilityReference[]
-                    {
-                        null,
-                        EarPiercingScream.ToReference<BlueprintAbilityReference>(),
-                        SoundBurst.ToReference<BlueprintAbilityReference>(),
-                        LightningBolt.ToReference<BlueprintAbilityReference>(),
-                        Shout.ToReference<BlueprintAbilityReference>(),
-                        IcyPrison.ToReference<BlueprintAbilityReference>(),
-                        ChainLightning.ToReference<BlueprintAbilityReference>(),
-                        KiShout.ToReference<BlueprintAbilityReference>(),
-                        ShoutGreater.ToReference<BlueprintAbilityReference>(),
-                        IcyPrisonMass.ToReference<BlueprintAbilityReference>()
-                    };
-                }));
-            });
-            Resources.AddBlueprint(BoomerConversionSpells);
-
-            var BoomerBonusSpellKnown1 = CreateBonusSpellKnown(SpellUtil.Spells.EarPiercingScream, 1, new BlueprintGuid(new Guid("7071384001994314a92c98d5df38a8cd")));
-            var BoomerBonusSpellKnown2 = CreateBonusSpellKnown(SpellUtil.Spells.SoundBurst, 2, new BlueprintGuid(new Guid("8f955886dd18438fa1e5d1b763b95c00")));
-            var BoomerBonusSpellKnown3 = CreateBonusSpellKnown(SpellUtil.Spells.LightningBolt, 3, new BlueprintGuid(new Guid("1482779198324fc9a2b280448bbfa692")));
-            var BoomerBonusSpellKnown4 = CreateBonusSpellKnown(SpellUtil.Spells.Shout, 4, new BlueprintGuid(new Guid("96e57a648b88442f8e023cc08a80d8ab")));
-            var BoomerBonusSpellKnown5 = CreateBonusSpellKnown(SpellUtil.Spells.IcyPrison, 5, new BlueprintGuid(new Guid("5c10df1b77dd406eaf3de50b092668f9")));
-            var BoomerBonusSpellKnown6 = CreateBonusSpellKnown(SpellUtil.Spells.ChainLightning, 6, new BlueprintGuid(new Guid("553ef1d68a244438a4d7acbaecc00764")));
-            var BoomerBonusSpellKnown7 = CreateBonusSpellKnown(SpellUtil.Spells.KiShout, 7, new BlueprintGuid(new Guid("0038fb36e6f1479e975ca45036dd0bf1")));
-            var BoomerBonusSpellKnown8 = CreateBonusSpellKnown(SpellUtil.Spells.ShoutGreater, 8, new BlueprintGuid(new Guid("4e47d003cafa4bf49ab609863eb36341")));
-            var BoomerBonusSpellKnown9 = CreateBonusSpellKnown(SpellUtil.Spells.IcyPrisonMass, 9, new BlueprintGuid(new Guid("a16358b7b0df481386cf6f38197f2ce8")));
 
             var BoomerBlastAbility = Helpers.Create<BlueprintAbility>(bp => {
                 bp.name = "BoomerBlastAbility";
@@ -305,6 +357,7 @@ namespace LegendsGrimoire.Content.Archetypes
                 bp.AssetGuid = AssetGuid;
                 bp.LocalizedName = Helpers.CreateString("BoomerArchetype.Name", "Boomer");
                 bp.LocalizedDescription = Helpers.CreateString("BoomerArchetype.Description", "");
+                bp.m_ReplaceSpellbook = BoomerSpellbook.ToReference<BlueprintSpellbookReference>();
                 bp.RemoveFeatures = new LevelEntry[]
                 {
                     new LevelEntry { Level = 1, Features = { FeatUtil.Selections.ArcanistExploitSelection } },
@@ -314,19 +367,10 @@ namespace LegendsGrimoire.Content.Archetypes
                 };
                 bp.AddFeatures = new LevelEntry[]
                 {
-                    new LevelEntry {Level = 1, Features = { BoomerBlast, BoomerBomb, BoomerConversionSpells } },
-                    new LevelEntry {Level = 2, Features = { BoomerBonusSpellKnown1 } },
+                    new LevelEntry {Level = 1, Features = { BoomerBlast, BoomerBomb } },
                     new LevelEntry {Level = 3, Features = { BoomerCombatInstincts } },
-                    new LevelEntry {Level = 4, Features = { BoomerBonusSpellKnown2 } },
-                    new LevelEntry {Level = 6, Features = { BoomerBonusSpellKnown3 } },
-                    new LevelEntry {Level = 8, Features = { BoomerBonusSpellKnown4 } },
                     new LevelEntry {Level = 9, Features = { BoomerBlastingFocus } },
-                    new LevelEntry {Level = 10, Features = { BoomerBonusSpellKnown5 } },
-                    new LevelEntry {Level = 12, Features = { BoomerBonusSpellKnown6 } },
-                    new LevelEntry {Level = 14, Features = { BoomerBonusSpellKnown7 } },
                     new LevelEntry {Level = 15, Features = { BoomerSpeedOfSound } },
-                    new LevelEntry {Level = 16, Features = { BoomerBonusSpellKnown8 } },
-                    new LevelEntry {Level = 18, Features = { BoomerBonusSpellKnown9 } },
                 };
             });
             Resources.AddBlueprint(BoomerArchetype);
@@ -337,47 +381,54 @@ namespace LegendsGrimoire.Content.Archetypes
                 Helpers.CreateUIGroup(
                     BoomerBomb,
                     BoomerBlast,
-                    BoomerConversionSpells,
                     BoomerCombatInstincts,
                     BoomerBlastingFocus,
                     BoomerSpeedOfSound
-                ),
-                Helpers.CreateUIGroup(
-                    BoomerBonusSpellKnown1,
-                    BoomerBonusSpellKnown2,
-                    BoomerBonusSpellKnown3,
-                    BoomerBonusSpellKnown4,
-                    BoomerBonusSpellKnown5,
-                    BoomerBonusSpellKnown6,
-                    BoomerBonusSpellKnown7,
-                    BoomerBonusSpellKnown8,
-                    BoomerBonusSpellKnown9
                 )
             );
             Logger.LogPatch("Added", BoomerArchetype);
         }
 
-        static BlueprintFeature CreateBonusSpellKnown(BlueprintAbility spell, int level, BlueprintGuid assetGuid)
+        static BlueprintBuff CreateSubstitutionBuff(string energy, BlueprintGuid assetId, UnityEngine.Sprite icon, SpellDescriptor energyType)
         {
-            var bonusSpellKnown = Helpers.Create<BlueprintFeature>(bp =>
+            var buff = Helpers.Create<BlueprintBuff>(bp =>
             {
-                bp.name = $"BoomerBonusSpellKnown{level}";
-                bp.AssetGuid = assetGuid;
-                bp.SetName(spell.Name);
-                bp.SetDescription("At 2nd level, and every two levels thereafter, the boomer learns an additional spell.\n"
-                    + $"{spell.Name}: {spell.Description}");
+                bp.name = $"BoomerDamageSubstitution{energy}Buff";
+                bp.AssetGuid = assetId;
+                bp.SetName($"Boomer Substitution - {energy}");
+                bp.SetDescription("All {g|Encyclopedia:Spell}spells{/g} that deal {g|Encyclopedia:Energy_Damage}energy damage{/g} that you cast will "
+                    + $"deal {energy.ToLower()} {{g|Encyclopedia:Damage}}damage{{/g}} instead. This also changes the spell's type to a {energy.ToLower()} spell.");
+                bp.FxOnStart = new PrefabLink();
+                bp.FxOnRemove = new PrefabLink();
                 bp.IsClassFeature = true;
-                bp.Ranks = 1;
-                bp.m_Icon = spell.Icon;
-                bp.AddComponent<AddKnownSpell>(c =>
+                bp.m_Flags = BlueprintBuff.Flags.StayOnDeath;
+                bp.m_Icon = icon;
+                bp.AddComponent<BoomerDamageSubstitution>(c =>
                 {
-                    c.m_CharacterClass = ClassUtil.Classes.Arcanist.ToReference<BlueprintCharacterClassReference>();
-                    c.m_Spell = spell.ToReference<BlueprintAbilityReference>();
-                    c.SpellLevel = level;
+                    c.EnergyType = energyType;
                 });
             });
-            Resources.AddBlueprint(bonusSpellKnown);
-            return bonusSpellKnown;
+            Resources.AddBlueprint(buff);
+            return buff;
+        }
+
+        static BlueprintActivatableAbility CreateSubstituteActivatableAbility(string energy, string name, string desc, BlueprintGuid assetId, BlueprintBuff buff, UnityEngine.Sprite icon)
+        {
+            var ability = Helpers.Create<BlueprintActivatableAbility>(bp =>
+            {
+                bp.name = $"BoomerDamageSubstitution{energy}Ability";
+                bp.AssetGuid = assetId;
+                bp.SetName(name);
+                bp.SetDescription(desc);
+                bp.m_Buff = buff.ToReference<BlueprintBuffReference>();
+                bp.IsOnByDefault = false;
+                bp.DoNotTurnOffOnRest = true;
+                bp.DeactivateImmediately = true;
+                bp.m_Icon = icon;
+                bp.Group = ActivatableAbilityGroup.FormInfusion;
+            });
+            Resources.AddBlueprint(ability);
+            return ability;
         }
     }
 
@@ -388,14 +439,14 @@ namespace LegendsGrimoire.Content.Archetypes
         {
             var context = evt.Reason.Context;
             var sourceAbility = context.SourceAbility;
-            if (sourceAbility == null || !context.SpellDescriptor.HasAnyFlag(SpellDescriptor.Sonic)
-                || !sourceAbility.IsSpell || sourceAbility.Type == AbilityType.Physical)
+            if (sourceAbility == null || !sourceAbility.IsSpell || sourceAbility.Type == AbilityType.Physical
+                || !context.SpellDescriptor.HasAnyFlag(SpellDescriptor.Sonic | SpellDescriptor.Acid | SpellDescriptor.Fire | SpellDescriptor.Cold | SpellDescriptor.Electricity))
             {
                 return;
             }
-            foreach (var item in evt.DamageBundle)
+            foreach (var damage in evt.DamageBundle)
             {
-                item.AddModifier(2, base.Fact);
+                damage.AddModifier(2 * damage.Dice.Rolls, base.Fact);
             }
         }
 
